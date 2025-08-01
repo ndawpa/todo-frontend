@@ -92,7 +92,7 @@ export const TodoList: React.FC = () => {
   return (
     <div className="todo-list">
       <div className="todo-header">
-        <h1>Todo Application</h1>
+        <h1>🚀 Todo Application v2.0</h1>
         <div className="todo-actions">
           <button 
             onClick={() => setShowCreateForm(!showCreateForm)}

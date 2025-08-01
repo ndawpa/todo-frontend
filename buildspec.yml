@@ -8,25 +8,24 @@ phases:
       - echo "Installing dependencies..."
       - npm ci
       
-  pre_build:
-    commands:
-      - echo "Pre-build phase..."
-      - npm run build
-      
   build:
     commands:
-      - echo "Build phase..."
+      - echo "Building frontend..."
+      - npm run build
+      - echo "Build completed. Contents of dist/:"
       - ls -la dist/
       
   post_build:
     commands:
-      - echo "Post-build phase..."
+      - echo "Deploying to S3..."
       - aws s3 sync dist/ s3://$WEBSITE_BUCKET --delete
+      - echo "Invalidating CloudFront cache..."
       - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+      - echo "Deployment completed!"
 
 artifacts:
   files:
-    - dist/**/*
+    - '**/*'
   base-directory: dist
 
 cache:

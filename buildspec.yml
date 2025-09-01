@@ -1,19 +1,33 @@
 version: 0.2
-
+env:
+  variables:
+    SONAR_TOKEN: sqa_eb899cbf3bfd908fca69f45482fbfcedd2bbe7f9
+    SONAR_HOST_URL: https://sonarqube.guiadodevops.com/
+    SONAR_PROJECT_KEY: ndawpa_todo-frontend_5d20ef4c-e7c7-4e88-ae65-d556c2f07f02
+    SCANNER_VER: 7.2.0.5079
 phases:
   install:
     runtime-versions:
+      java: corretto17
       nodejs: 18
     commands:
       - echo "Installing dependencies..."
       - npm ci
-      
+
+  pre_build:
+    commands:
+      - echo "Installing Sonar Scanner..."
+      - curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SCANNER_VER}-linux-x64.zip
+      - unzip sonar-scanner.zip -d /opt
+
   build:
     commands:
       - echo "Building frontend..."
       - npm run build
       - echo "Build completed. Contents of dist/:"
       - ls -la dist/
+      - echo "Running SonarQube Analysis..."
+      - /opt/sonar-scanner-${SCANNER_VER}-linux-x64/bin/sonar-scanner -Dsonar.projectKey=$SONAR_PROJECT_KEY -Dsonar.sources=. -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
       
   post_build:
     commands:

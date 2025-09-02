@@ -1,6 +1,6 @@
 version: 0.2
 env:
-  secret_manager:
+  secrets-manager:
     SONAR_TOKEN: arn:aws:secretsmanager:us-east-1:440748827272:secret:sonar-variables-70WvqD:SONAR_TOKEN
     SONAR_HOST_URL: arn:aws:secretsmanager:us-east-1:440748827272:secret:sonar-variables-70WvqD:SONAR_HOST_URL
     SONAR_PROJECT_KEY: arn:aws:secretsmanager:us-east-1:440748827272:secret:sonar-variables-70WvqD:SONAR_PROJECT_KEY

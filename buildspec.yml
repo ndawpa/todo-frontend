@@ -5,9 +5,6 @@ env:
     SONAR_HOST_URL: arn:aws:secretsmanager:us-east-1:440748827272:secret:sonar-variables-70WvqD:SONAR_HOST_URL
     SONAR_PROJECT_KEY: arn:aws:secretsmanager:us-east-1:440748827272:secret:sonar-variables-70WvqD:SONAR_PROJECT_KEY
   variables:
-    # SONAR_TOKEN: sqa_eb899cbf3bfd908fca69f45482fbfcedd2bbe7f9
-    # SONAR_HOST_URL: https://sonarqube.guiadodevops.com/
-    # SONAR_PROJECT_KEY: ndawpa_todo-frontend_5d20ef4c-e7c7-4e88-ae65-d556c2f07f02
     SCANNER_VER: 7.2.0.5079
 phases:
   install:
